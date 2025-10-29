@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bunk Here</title>
+  <style>
+    /* --- General Styling --- */
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #ff512f, #f09819);
+      color: #333;
+      overflow-x: hidden;
+      text-align: center;
+      transition: background 0.5s ease-in-out;
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 20px;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .home-btn {
+      cursor: pointer;
+      font-size: 22px;
+      transition: transform 0.2s;
+    }
+
+    .home-btn:hover {
+      transform: scale(1.1);
+      color: #fdd835;
+    }
+
+    section {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      margin: 40px auto;
+      padding: 25px;
+      width: 90%;
+      max-width: 500px;
+      display: none;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    h2 {
+      color: #ff512f;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    input, select, button {
+      width: 85%;
+      padding: 12px;
+      margin: 10px auto;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    input:focus, select:focus {
+      border-color: #ff512f;
+      outline: none;
+      box-shadow: 0 0 8px rgba(255,81,47,0.3);
+    }
+
+    button {
+      background: linear-gradient(45deg, #ff512f, #f09819);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(255,81,47,0.5);
+    }
+
+    #map, #gprs-map {
+      width: 90%;
+      height: 400px;
+      margin: 20px auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      display: none;
+    }
+
+    img {
+      width: 120px;
+      border-radius: 20px;
+      margin: 15px 0;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    #stars {
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    .star.highlighted {
+      color: gold;
+      text-shadow: 0 0 10px gold;
+      transform: scale(1.2);
+    }
+
+    #rating-text {
+      font-weight: bold;
+      color: #444;
+    }
+
+    /* --- Offline Alert Styling --- */
+    #offline-alert {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #ff8800;
+      color: #fff;
+      font-weight: bold;
+      text-align: center;
+      padding: 12px 10px;
+      z-index: 9999;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      animation: slideDown 0.5s ease;
+    }
+
+    @keyframes slideDown {
+      from {transform: translateY(-100%); opacity: 0;}
+      to {transform: translateY(0); opacity: 1;}
+    }
+
+    #offline-alert .call-btn {
+      display: inline-block;
+      margin-top: 8px;
+      background: #fff;
+      color: #ff8800;
+      padding: 8px 18px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      animation: pulse 1.5s infinite;
+    }
+
+    #offline-alert .call-btn:hover {
+      background: #ffe0b2;
+      transform: scale(1.08);
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(255,255,255,0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+    }
+  </style>
+</head>
+<body onload="showPage('home')">
+
+  <!-- Offline Alert -->
+  <div id="offline-alert">
+    ⚠️ No Internet Connection.<br>
+    Please call our toll-free number <strong>1800-123-3835</strong><br>
+    <a href="tel:18001233835" class="call-btn">📞 Call Now</a>
+  </div>
+
+<header>
+  <div class="home-btn" onclick="showPage('home')">🏠 Home</div>
+  <div>Bunk Here ⛽</div>
+</header>
+
+<section id="home">
+  <h2>Welcome to <span style="color:#ff512f;">Bunk Here</span></h2>
+  <p>Your trusted fuel delivery partner 🚚</p>
+  <img src="C:\Users\chand\OneDrive\Pictures\bunklogo.jpg" alt="Fuel Delivery" />
+  <button onclick="showPage('register')">🚀 Get Started</button>
+</section>
+
+<section id="register">
+  <h2>🔐 User Registration</h2>
+  <input type="text" id="fullname" placeholder="Full Name" required>
+  <input type="email" id="email" placeholder="Email" required>
+  <input type="tel" id="phone" placeholder="Phone Number" required>
+  <button onclick="sendOTP()">Send OTP</button>
+  <div id="otp-section" style="display:none;">
+    <input type="text" id="otp" placeholder="Enter OTP" required>
+    <button onclick="verifyOTP()">Verify OTP</button>
+  </div>
+</section>
+
+<section id="order">
+  <h2>⛽ Place Your Order</h2>
+  <select id="fuel-pump">
+    <option value="">Select Fuel Pump</option>
+    <option>Indian Oil</option>
+    <option>Bharat Oil</option>
+    <option>HP Pump</option>
+    <option>Essar+</option>
+  </select>
+  <select id="fuel-type">
+    <option value="">Select Fuel Type</option>
+    <option>Petrol</option>
+    <option>Diesel</option>
+  </select>
+  <input type="number" id="quantity" placeholder="Quantity (Liters)" required>
+  <input type="text" id="city" placeholder="City" required>
+  <input type="text" id="area" placeholder="Area" required>
+  <input type="text" id="landmark" placeholder="Landmark" required>
+  <input type="text" id="colony" placeholder="Colony" required>
+  <input type="text" id="street" placeholder="Street" required>
+  <input type="text" id="pincode" placeholder="Pin Code" required>
+  <input type="date" id="date" required>
+  <select id="payment-method" onchange="showPaymentFields()">
+    <option value="">Select Payment Method</option>
+    <option value="Credit Card">Credit Card</option>
+    <option value="Debit Card">Debit Card</option>
+    <option value="UPI">UPI</option>
+    <option value="Cash on Delivery">Cash on Delivery</option>
+    <option value="Google Pay">Google Pay</option>
+    <option value="Phone Pay">Phone Pay</option>
+  </select>
+  <div id="payment-fields"></div>
+  <button onclick="generateSummary()">Next</button>
+</section>
+
+<section id="order-summary">
+  <h2>🧾 Order Summary</h2>
+  <div id="summary-content"></div>
+  <button onclick="showPage('tracking')">Proceed to Tracking 🚛</button>
+</section>
+
+<section id="tracking">
+  <h2>📍 Track Your Delivery</h2>
+  <button onclick="startTracking()">Start Tracking</button>
+  <div id="gprs-map"></div>
+  <button onclick="showPage('confirm-order')">Confirm Delivery</button>
+</section>
+
+<section id="confirm-order">
+  <h2>✅ Delivery Confirmation</h2>
+  <img src="C:\Users\chand\OneDrive\Pictures\delivery_boy - Copy.jpg" alt="Delivery Boy">
+  <p>Your fuel is being delivered by our trusted partner.</p>
+  <button onclick="showSuccessMessage()">Confirm Delivery</button>
+</section>
+
+<section id="rating">
+  <h2>⭐ Rate Our Service</h2>
+  <p>How was your experience?</p>
+  <div id="stars">
+    <span class="star" onclick="setRating(1)">⭐</span>
+    <span class="star" onclick="setRating(2)">⭐</span>
+    <span class="star" onclick="setRating(3)">⭐</span>
+    <span class="star" onclick="setRating(4)">⭐</span>
+    <span class="star" onclick="setRating(5)">⭐</span>
+  </div>
+  <p id="rating-text"></p>
+  <button onclick="submitRating()">Submit Rating</button>
+</section>
+
+<script>
+  // Page navigation
+  function showPage(id){
+    document.querySelectorAll('section').forEach(s=>s.style.display='none');
+    document.getElementById(id).style.display='block';
+  }
+
+  // Registration & OTP
+  function sendOTP(){
+    const name=document.getElementById("fullname").value.trim();
+    const email=document.getElementById("email").value.trim();
+    const phone=document.getElementById("phone").value.trim();
+    if(!name||!email||!phone){alert("Please fill all fields!");return;}
+    if(!/^[0-9]{10}$/.test(phone)){alert("Invalid phone number.");return;}
+    alert("OTP sent! (Use 1234 for demo)");
+    document.getElementById("otp-section").style.display="block";
+  }
+
+  function verifyOTP(){
+    const otp=document.getElementById("otp").value.trim();
+    if(otp==="1234"){alert("OTP Verified ✅");showPage("order");}
+    else alert("Invalid OTP ❌");
+  }
+
+  // Payment method dynamic fields
+  function showPaymentFields(){
+    const m=document.getElementById("payment-method").value;
+    const f=document.getElementById("payment-fields");
+    f.innerHTML="";
+    if(["Credit Card","Debit Card"].includes(m)){
+      f.innerHTML=`<input placeholder="Card Number" maxlength="16">
+                   <input placeholder="Name on Card">
+                   <input placeholder="MM/YY">
+                   <input placeholder="CVV" maxlength="3">`;
+    } else if(["UPI","Google Pay","Phone Pay"].includes(m)){
+      f.innerHTML=`<input placeholder="Enter UPI ID (example@upi)">`;
+    }
+  }
+
+  // Order summary with date validation
+  function generateSummary(){
+    const date=document.getElementById("date").value;
+    const today=new Date().toISOString().split('T')[0];
+    if(date<today){alert("⚠️ Past date! Choose today or future.");return;}
+    const ids=["fuel-pump","fuel-type","quantity","city","area","landmark","colony","street","pincode","date","payment-method"];
+    for(let id of ids){if(!document.getElementById(id).value.trim()){alert("Fill all fields!");return;}}
+    let summary="";
+    ids.forEach(id=>{summary+=`<p><b>${id.replace("-"," ").toUpperCase()}:</b> ${document.getElementById(id).value}</p>`;});
+    document.getElementById("summary-content").innerHTML=summary;
+    showPage("order-summary");
+  }
+
+  // GPS tracking
+  let map, marker, watchId;
+  function startTracking(){
+    const mapDiv=document.getElementById("gprs-map");
+    mapDiv.style.display="block";
+    if(navigator.geolocation){navigator.geolocation.getCurrentPosition(initMap,err=>alert(err.message));}
+  }
+  function initMap(pos){
+    const loc={lat:pos.coords.latitude,lng:pos.coords.longitude};
+    map=new google.maps.Map(document.getElementById("gprs-map"),{center:loc,zoom:15});
+    marker=new google.maps.Marker({position:loc,map:map,title:"You are here!",animation:google.maps.Animation.DROP});
+    watchId=navigator.geolocation.watchPosition(p=>marker.setPosition({lat:p.coords.latitude,lng:p.coords.longitude}));
+  }
+
+  function showSuccessMessage(){
+    alert("✅ Fuel Delivered Successfully!");
+    if(watchId) navigator.geolocation.clearWatch(watchId);
+    showPage('rating');
+  }
+
+  // Rating system
+  let userRating=0;
+  function setRating(r){
+    userRating=r;
+    document.querySelectorAll('#stars .star').forEach((s,i)=>s.classList.toggle('highlighted',i<r));
+    document.getElementById('rating-text').textContent=`You rated ${r} star${r>1?'s':''}`;
+  }
+
+  function submitRating(){
+    if(!userRating){alert("Please rate!");return;}
+    alert(`Thank you for rating us ${userRating}⭐!`);
+    showPage('home');
+  }
+
+  // --- Detect Offline/Online ---
+  function updateNetworkStatus(){
+    const alertBox=document.getElementById("offline-alert");
+    if(navigator.onLine){
+      alertBox.style.display="none";
+    } else {
+      alertBox.style.display="block";
+    }
+  }
+
+  window.addEventListener('online',updateNetworkStatus);
+  window.addEventListener('offline',updateNetworkStatus);
+  updateNetworkStatus();
+</script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzmN5fg-H1bsxz85sKoJ17jeZYlUG0AFk"></script>
+</body>
+</html>
